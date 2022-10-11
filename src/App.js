@@ -1,12 +1,17 @@
+import { Player } from "@remotion/player";
+import React from "react";
+import Mainvideo from "./components1/mainvideo";
 
-function App() {
+ 
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-       
-      </header>
-    </div>
+    <Player
+      component={Mainvideo}
+      durationInFrames={120}
+      compositionWidth={1920}
+      compositionHeight={1080}
+      fps={30}
+    />
   );
-}
+};
 
-export default App;

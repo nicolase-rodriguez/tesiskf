@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import { Player } from "@remotion/player";
+import React from "react";
+import Mainvideo from "./components1/mainvideo";
 
-function App() {
+ 
+ const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Player
+      component={Mainvideo}
+      durationInFrames={120}
+      compositionWidth={1920}
+      compositionHeight={1080}
+      fps={30}
+      controls
+      style={{maxWidth:"100vw", maxHeight:"100vh"}}
+    />
   );
-}
+};
 
-export default App;
+export default App

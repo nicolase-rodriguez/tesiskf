@@ -3,7 +3,7 @@ import React from "react";
 import Mainvideo from "./components1/mainvideo";
 
  
-export const App = () => {
+ const App = () => {
   return (
     <Player
       component={Mainvideo}
@@ -11,7 +11,10 @@ export const App = () => {
       compositionWidth={1920}
       compositionHeight={1080}
       fps={30}
+      controls
+      style={{maxWidth:"100vw", maxHeight:"100vh"}}
     />
   );
 };
 
+export default App

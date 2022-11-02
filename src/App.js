@@ -2,6 +2,9 @@ import { Player } from "@remotion/player";
 import React, { useEffect, useRef, useState } from "react";
 import Mainvideo from "./components1/mainvideo";
 import "./app.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExpand, faPlay, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
+
 
  const App = () => {
   const [ ispaused, setispaused ] = useState(false)
@@ -27,7 +30,19 @@ useEffect(() => {
 }, []);
   return (
     <>
-    { ispaused &&<div className="background"> </div>}
+    { ispaused &&<div className="background"> 
+    <h1 class="tittle">TITULO VIDEO</h1>
+    <div class="linetittle"> </div>
+    <div class="description">
+    <h4> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into  </h4>
+    </div>
+    <div class="controls">
+    <FontAwesomeIcon icon={faPlay} />
+    <FontAwesomeIcon icon={faVolumeUp} />
+    <div class="time"> </div>
+    <FontAwesomeIcon icon={faExpand} />
+    </div>
+    </div>}
     <Player
       ref={playerRef}
       component={Mainvideo}

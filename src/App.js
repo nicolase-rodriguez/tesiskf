@@ -1,20 +1,22 @@
-import { Player } from "@remotion/player";
 import React from "react";
-import Mainvideo from "./components1/mainvideo";
+import Home from "./screens/home";
+import { createBrowserRouter, RouterProvider, Route } from "react-router-dom";
+import MainPlayer from "./screens/mainPlayer";
 
- 
- const App = () => {
-  return (
-    <Player
-      component={Mainvideo}
-      durationInFrames={120}
-      compositionWidth={1920}
-      compositionHeight={1080}
-      fps={30}
-      controls
-      style={{maxWidth:"100vw", maxHeight:"100vh"}}
-    />
-  );
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/mainPlayer",
+    element: <MainPlayer />,
+  },
+]);
+
+const App = () => {
+  return <RouterProvider router={router} />;
 };
 
-export default App
+export default App;
+

@@ -57,7 +57,6 @@ body {
   height: 0.2vh;
   border-radius: 20px;
 }
-<<<<<<< HEAD
 
 @media (max-width: 700px) {
   .tittle {
@@ -76,30 +75,4 @@ body {
     left: 5vw;
     font-size: 3vw;
   }
-=======
-.description{
-    display: flex;
-    margin-left: 8vw;
-    padding: 10px;
-    font-weight: 100;
-    width: 30vw;
-    color: rgba(255, 255, 255, 0.795);
-}
-@media (max-width:700px){
-    .tittle{
-        justify-content: center;
-        margin-left: 0;
-
-    }
-    .linetittle{
-        width: 90vw;
-        margin:auto;
-
-    }
-    .description{
-        width: 90vw;
-        margin: auto;
-    }
-   
->>>>>>> de6091804445415ae8e0c1c7680ccc73e272b0a9
 }

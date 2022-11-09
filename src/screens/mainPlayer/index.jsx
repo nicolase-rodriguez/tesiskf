@@ -6,7 +6,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Player } from "@remotion/player";
 import React, { useEffect, useRef, useState } from "react";
-import Mainvideo from "../components1/mainvideo";
+import Mainvideo from "../../components1/mainvideo";
+import "./mainPlayer.css";
 
 const MainPlayer = () => {
   const [ispaused, setispaused] = useState(false);
@@ -38,7 +39,6 @@ const MainPlayer = () => {
           <div class="linetittle"> </div>
           <div class="description">
             <h4>
-              {" "}
               Lorem Ipsum is simply dummy text of the printing and typesetting
               industry. Lorem Ipsum has been the industry's standard dummy text
               ever since the 1500s, when an unknown printer took a galley of

@@ -4,7 +4,7 @@ import Mainvideo from "./components1/mainvideo";
 import "./app.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExpand, faPlay, faVolumeUp } from "@fortawesome/free-solid-svg-icons";
-
+import Controls from "./components1/controlplayer";
 
  const App = () => {
   const [ ispaused, setispaused ] = useState(false)

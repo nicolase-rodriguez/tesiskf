@@ -5,14 +5,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Player } from "@remotion/player";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Context } from "../../App";
 import Mainvideo from "../../components1/mainvideo";
 import "./mainPlayer.css";
 
 const MainPlayer = () => {
   const [ispaused, setispaused] = useState(false);
   const playerRef = useRef(null);
-
+  const state = useContext(Context)
+  console.log(state)
+  
   useEffect(() => {
     const { current } = playerRef;
     if (!current) {

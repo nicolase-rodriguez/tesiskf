@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { AbsoluteFill, Video } from 'remotion';
+import videoData from '../data/videos.json';
 function Mainvideo() {
+  const [currentPosition, setCurrentPosition] = useState(0);
   return (
     <AbsoluteFill>
       <Video
-        src={'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'}
+        src={videoData.find(video=>video.position===currentPosition).url}
       />
     </AbsoluteFill>
   );

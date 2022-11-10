@@ -16,6 +16,7 @@ body {
   font-size: x-large;
   margin-bottom: 1vw;
   border-radius: 5px;
+  animation: opacidad 3s;
 }
 #nameinput::placeholder {
   text-align: center;
@@ -30,4 +31,9 @@ body {
   border-radius: 5px;
   font-weight: bold;
   font-size: large;
+  animation: opacidad 3s;
+}
+@keyframes opacidad { 
+    from {opacity: 0 ;}
+    to {opacity: 1 ;}
 }

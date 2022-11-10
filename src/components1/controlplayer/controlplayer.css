@@ -11,9 +11,17 @@
     height: 5vh;
     position: absolute;
     bottom: 8vh;
-    left: 6vw;
+    left: 5vw;
     color: white;
     font-size: 2vw;
+}
+button{
+    padding: 0.5vw;
+    font-size: 2vw;
+    color: white;
+    background: none;
+    border: none;
+
 }
 
 .time{

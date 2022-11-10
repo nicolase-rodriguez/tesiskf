@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { useNavigate } from 'react-router-dom';
+import { Context } from '../../App';
 import './home.css';
+
+
 function Home() {
+
   const [texto, setTexto] = useState('');
   const history = useNavigate();
-
+  const state = useContext(Context)
   const InputChange = ({ target }) => {
     setTexto(target.value);
   };
@@ -13,7 +17,7 @@ function Home() {
   const Submit = (e) => {
     e.preventDefault();
     var resultado = calcular(texto);
-    console.log(resultado);
+    state.setState((prevState) => ({...prevState, nameNumber: resultado}));
     history('/mainPlayer');
   };
 
@@ -71,14 +75,7 @@ function Home() {
         }
       }
 
-      var resultado =
-        error +
-        'Tu nombre ' +
-        nombre +
-        ' digitalmente es: ' +
-        nombreNumeros +
-        ' y es equivalente a: ' +
-        nombreTotalNumeros;
+      var resultado = nombreTotalNumeros;
 
       return resultado;
     } else {

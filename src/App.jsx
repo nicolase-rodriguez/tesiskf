@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Home from './screens/home';
 import MainPlayer from './screens/mainPlayer';
 
+export const Context = createContext(null)
 const router = createBrowserRouter([
   {
     path: '/',
@@ -15,7 +16,8 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  const [state, setState] = useState({nameNumber: undefined});
+  return <Context.Provider  value={{state, setState}}><RouterProvider router={router} /></Context.Provider>;
 }
 
 export default App;

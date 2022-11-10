@@ -6,6 +6,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Player } from "@remotion/player";
 import React, { useEffect, useRef, useState } from "react";
+import Controls from "../../components1/controlplayer";
 import Mainvideo from "../../components1/mainvideo";
 import "./mainPlayer.css";
 
@@ -46,12 +47,7 @@ const MainPlayer = () => {
               survived not only five centuries, but also the leap into{" "}
             </h4>
           </div>
-          <div class="controls">
-            <FontAwesomeIcon icon={faPlay} />
-            <FontAwesomeIcon icon={faVolumeUp} />
-            <div class="time"> </div>
-            <FontAwesomeIcon icon={faExpand} />
-          </div>
+         <Controls playerRef={playerRef} ispaused={ispaused}/>
         </div>
       )}
       <Player
@@ -61,9 +57,9 @@ const MainPlayer = () => {
         compositionWidth={1920}
         compositionHeight={1080}
         fps={30}
-        controls
         style={{ maxWidth: "100vw", maxHeight: "100vh" }}
       />
+      <Controls playerRef={playerRef} ispaused={ispaused}/>
     </>
   );
 };

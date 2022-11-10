@@ -6,6 +6,7 @@
 }
 body {
   font-family: 'Lato', sans-serif;
+  background: rgb(66, 54, 54);
 }
 .background {
   height: 100vh;
@@ -36,18 +37,6 @@ body {
   font-weight: 100;
   width: 30vw;
   color: rgba(255, 255, 255, 0.795);
-}
-.controls {
-  display: flex;
-  width: 90vw;
-  justify-content: space-between;
-  align-items: center;
-  height: 5vh;
-  position: absolute;
-  bottom: 8vh;
-  left: 6vw;
-  color: white;
-  font-size: 2vw;
 }
 
 .time {

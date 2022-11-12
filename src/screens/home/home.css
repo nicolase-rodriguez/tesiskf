@@ -1,43 +1,71 @@
 #homecontainer {
-  background-color: #471323;
-  min-height: 100%;
+  background-color: #595959cc;
   display: flex;
   justify-content: center;
-  align-items: center;
   flex-direction: column;
-  position : absolute;
-  width : 100%;
+  padding: 10%;
+  position: absolute;
+  top: 0;
+  width: 100%;
   height: 100%;
 }
 
-body {
-  margin: 0;
-}
 #nameinput {
-  width: auto !important;
-  padding: 1vw;
-  text-align: center;
-  font-size: x-large;
-  margin-bottom: 1vw;
-  border-radius: 5px;
+  width: 35%;
+  padding: 0.8% 2%;
+  font-size: 20px;
+  margin-top: 1%;
   animation: opacidad 3s;
+  margin-right: 0;
+  height: 100%;
+}
+#nameinput:focus-visible {
+  outline: none;
 }
 #nameinput::placeholder {
-  text-align: center;
-  font-size: x-large;
-  font-weight: bold;
+  text-align: left;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 200;
 }
 #enviar {
-  width: auto !important;
-  padding: 0.5vw;
+  height: 100%;
+  padding: 0 1vw;
   background-color: black;
   color: aliceblue;
-  border-radius: 5px;
   font-weight: bold;
   font-size: large;
+  margin-left: 0;
+  border: none;
   animation: opacidad 3s;
 }
-@keyframes opacidad { 
-    from {opacity: 0 ;}
-    to {opacity: 1 ;}
+
+#homeTitle {
+  font-size: 96px;
+  font-weight: 500;
+  font-style: italic;
+  color: #fefefe;
 }
+
+#homeSubtitle {
+  color: #fefefe;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 24px;
+}
+
+#homeDescription {
+  color: #fefefe;
+  font-style: italic;
+  font-weight: 200;
+  font-size: 35px;
+  width: 50%;
+  margin-top: 3%;
+}
+
+#homePlayerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

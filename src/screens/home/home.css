@@ -1,21 +1,26 @@
 #homecontainer {
   background-color: #471323;
-  height: 100vh;
+  min-height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position : absolute;
+  width : 100%;
+  height: 100%;
 }
+
 body {
   margin: 0;
 }
 #nameinput {
-  width: 25vw;
+  width: auto !important;
   padding: 1vw;
   text-align: center;
   font-size: x-large;
   margin-bottom: 1vw;
   border-radius: 5px;
+  animation: opacidad 3s;
 }
 #nameinput::placeholder {
   text-align: center;
@@ -23,11 +28,16 @@ body {
   font-weight: bold;
 }
 #enviar {
-  width: 10vw;
+  width: auto !important;
   padding: 0.5vw;
   background-color: black;
   color: aliceblue;
   border-radius: 5px;
   font-weight: bold;
   font-size: large;
+  animation: opacidad 3s;
+}
+@keyframes opacidad { 
+    from {opacity: 0 ;}
+    to {opacity: 1 ;}
 }

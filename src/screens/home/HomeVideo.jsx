@@ -121,12 +121,12 @@ function HomeVideo() {
         <>
           <Video src={backgroundVideo.url} />
           <div id="homecontainer">
-            <h1 id="homeTitle">Camino Abraxas</h1>
+            <h1 id="homeTitle">Camino de Abraxas</h1>
             <h3 id="homeSubtitle">Camila Diaz</h3>
             <p id="homeDescription">
-              lakjdkaljdlsjdfklñjañlksjflkñajslkdfa kjdfkj ajksnf fajshdfj
-              lkasdf jk fansd fno3 kjb f8 j hja sdf0 nahjs fa s bapw ey asubfasi
-              f´nñ abfbn asdfa asdf sfbabsdiñufb
+              Bienvenidos al camino de Abraxas un video musical, interactivo, en
+              donde tienes el control de toda la experiencia. Tú decides la
+              trayectoria del viaje ¿Estás listo?
             </p>
             <form onSubmit={Submit}>
               <input

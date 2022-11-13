@@ -1,22 +1,32 @@
 .background {
   height: 100vh;
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.9);
   position: absolute;
   z-index: 1;
-  animation: opacidad 2s;
+  animation: opacidad7 1s;
+  opacity: 0.8;
 }
 .tittle {
   display: flex;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.918);
+  font-weight: 500;
+  font-style: italic;
+  font-size: 96px;
+  color: #fefefe;
   padding: 5px;
   margin-left: 8vw;
-  margin-top: 5vw;
+  margin-top: 10vw;
+}
+#thankYouText{
+  font-weight: 500;
+  font-style: italic;
+  font-size: 96px;
+  color: #fefefe;
+  margin-top: 10vw;
 }
 .linetittle {
   display: flex;
-  width: 30vw;
+  width: 40vw;
   background-color: white;
   height: 0.1vh;
   margin-left: 8vw;
@@ -25,21 +35,28 @@
   display: flex;
   margin-left: 8vw;
   padding: 10px;
-  font-weight: 100;
-  width: 30vw;
-  color: rgba(255, 255, 255, 0.795);
+  font-weight: 200;
+  width: 40vw;
+  color: #fefefe;
+  font-style: italic;
+  font-size: 35px;
 }
 .controls {
   display: flex;
   width: 90vw;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   height: 5vh;
   position: absolute;
-  bottom: 8vh;
+  bottom: 6vh;
   left: 6vw;
+}
+
+#pausePlayButton {
+  background-color: transparent;
+  border: none;
   color: white;
-  font-size: 2vw;
+  font-size: 1.8vw;
 }
 
 .time {
@@ -58,6 +75,60 @@
   animation: opacidad 3s;
 }
 
+#questionContainer {
+  background: linear-gradient(#000000dd 50%, #00000000);
+  position: absolute;
+  top: 0vw;
+  padding-top: 1vw;
+  padding-bottom: 3vw;
+  width: 100%;
+  margin: 0 auto;
+  z-index: 1;
+  text-align: center;
+  opacity: 0.8;
+  animation: opacidad7 1s;
+}
+
+#questionTitle {
+  color: #fefefe;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 35px;
+}
+
+.questionChoice {
+  margin: 1vw;
+  padding: 1vw;
+  width: 6vw;
+  outline: none;
+  font-size: 35px;
+  background-color: #adadad;
+  border: none;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  border-radius: 3px;
+  color: #fefefe;
+}
+
+.questionChoice:hover {
+  cursor: pointer;
+  box-shadow: 0px 0px 15px 7px #595959bb;
+}
+
+#creditsContainer {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 100;
+  background-color: #0d0d0d;
+  width: 100%;
+  height: 100%;
+  color: #fefefe;
+}
+
+#creditsTextContainer {
+  position: absolute;
+  width: 100%;
+}
+
 @media (max-width: 700px) {
   .tittle {
     justify-content: center;
@@ -74,5 +145,14 @@
   .controls {
     left: 5vw;
     font-size: 3vw;
+  }
+}
+
+@keyframes opacidad7 {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.8;
   }
 }

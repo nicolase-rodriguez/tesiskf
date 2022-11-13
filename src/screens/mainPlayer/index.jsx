@@ -53,7 +53,7 @@ const MainPlayer = () => {
     if (nextVideo) {
       preloadVideo(nextVideo.url);
       getVideoMetadata(nextVideo.url).then(({ durationInSeconds }) => {
-        const duration = Math.round(durationInSeconds * 30);
+        const duration = Math.round(durationInSeconds * 30) + 20;
         if (!currentVideo) {
           setCurrentVideo(nextVideo);
           setVideoDuration(duration);
@@ -87,10 +87,17 @@ const MainPlayer = () => {
           setVideoDuration(nextVideoDuration);
         } else if (isLastVideoFinished) {
           navigate("/");
-        } else {
+        } else if (!videoList.length) {
           setIsLastVideoFinished(true);
           setVideoDuration(1000);
         }
+      } else if (
+        videoDuration - 20 === event.detail.frame &&
+        !nextVideo &&
+        !isLastVideoFinished &&
+        videoList.length
+      ) {
+        current.pause();
       }
     };
     current.addEventListener("play", playlistener);
@@ -140,6 +147,7 @@ const MainPlayer = () => {
                 }));
                 setCurrentPosition((pPosition) => pPosition + 1);
                 setShowQuestion(false);
+                playerRef.current.play();
               }}
             >
               <FontAwesomeIcon
@@ -156,6 +164,7 @@ const MainPlayer = () => {
                 }));
                 setCurrentPosition((pPosition) => pPosition + 1);
                 setShowQuestion(false);
+                playerRef.current.play();
               }}
             >
               <FontAwesomeIcon

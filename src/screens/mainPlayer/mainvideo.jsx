@@ -16,7 +16,7 @@ function Mainvideo({ currentVideo, isLastVideoFinished }) {
       ) : (
         <Video
           src={currentVideo.url}
-          style={{ boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)" }}
+          style={{ boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.75)", flex: 1 }}
         />
       )}
     </AbsoluteFill>

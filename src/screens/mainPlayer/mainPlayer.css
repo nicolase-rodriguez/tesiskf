@@ -17,12 +17,12 @@
   margin-left: 8vw;
   margin-top: 10vw;
 }
-#thankYouText{
+#thankYouText {
   font-weight: 500;
   font-style: italic;
   font-size: 96px;
   color: #fefefe;
-  margin-top: 10vw;
+  margin-top: 50vw;
 }
 .linetittle {
   display: flex;
@@ -76,7 +76,7 @@
 }
 
 #questionContainer {
-  background: linear-gradient(#000000dd 50%, #00000000);
+  background: linear-gradient(#ff3a2099, #ff3a2000 75%);
   position: absolute;
   top: 0vw;
   padding-top: 1vw;

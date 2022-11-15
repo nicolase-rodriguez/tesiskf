@@ -1,0 +1,87 @@
+[
+  {
+    "title": "Asistente de Arte",
+    "workers": [
+      "Mariana Andrea Moreno Ríos",
+      "Andrés Felipe Sánchez",
+      "Maria Fernanda Muñoz"
+    ]
+  },
+  {
+    "title": "Asistente de Dirección",
+    "workers": ["Laura Valentina Hernández"]
+  },
+  {
+    "title": "Asistente de Producción",
+    "workers": ["Jailene Mariana Ríos", "Sofia Castro"]
+  },
+  {
+    "title": "Asistente de Foto",
+    "workers": [
+      "David Felipe Reyes",
+      "Ruslan Rodríguez Romero",
+      "Andres Rivera"
+    ]
+  },
+  {
+    "title": "Artista y Desarrollador Senior",
+    "workers": ["Brageanth David Palencia Avila"]
+  },
+  {
+    "title": "Dirección de Arte",
+    "workers": ["Julian Silva"]
+  },
+  {
+    "title": "Ambientador",
+    "workers": ["Haider Espitia"]
+  },
+  {
+    "title": "Dirección y Dirección de Foto",
+    "workers": ["Camila Díaz"]
+  },
+  {
+    "title": "Maquilladora",
+    "workers": ["Melissa Mojica"]
+  },
+  {
+    "title": "Foto Fija",
+    "workers": ["Alejandro González"]
+  },
+  {
+    "title": "Productor",
+    "workers": ["Fabian Ramirez"]
+  },
+  {
+    "title": "Productor",
+    "workers": ["Fabian Ramirez"]
+  },
+  {
+    "title": "Diseño de Animación",
+    "workers": ["Erika Lopez", "Alejandra Suárez"]
+  },
+  {
+    "title": "Figurante",
+    "workers": ["Valeria Mejía", "Juan Jose Torres", "Faver Murcia"]
+  },
+  {
+    "title": "Vestuarista",
+    "workers": ["Mariana Serna"]
+  },
+  {
+    "title": "Ingeniero de Sonido",
+    "workers": ["Martin Sabogal"]
+  },
+  {
+    "title": "Producción Musical",
+    "workers": ["Andres Cruz"]
+  },
+  {
+    "title": "Desarrollador Junior",
+    "workers": [
+      "David Rocha",
+      "Nicolas Rodríguez",
+      "Sebastian Miranda",
+      "Julian Rique"
+    ]
+  }
+]

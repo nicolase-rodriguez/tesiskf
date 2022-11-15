@@ -116,7 +116,13 @@ function HomeVideo() {
     }
   }
   return (
-    <AbsoluteFill>
+    <AbsoluteFill
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       {backgroundVideo && (
         <>
           <Video src={backgroundVideo.url} />

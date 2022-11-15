@@ -1,25 +1,25 @@
-import { useCurrentFrame } from "remotion";
+import { interpolate, useCurrentFrame } from "remotion";
+import CreditsData from "../../data/credits.json";
 
 function CreditsVideo() {
   const frame = useCurrentFrame();
+  const bottom = interpolate(frame, [0, 3500], [-2000, 860]); 
+
   return (
     <div id="creditsContainer">
-      <p id="creditsTextContainer" style={{ bottom: frame }}>
-        Camila diaz <br /> Melissa Mojica <br />
-        Julian Silva <br />
-        David Rocha
-        <br /> Brageanth Palencia
-        <br />
-        Nicolas Rodriguez
-        <br /> Sebastian Miranda
-        <br /> Julian Rique
-        <br /> Haide Espitia
-        <br /> Nohora Mojica
-        <br /> Rito diaz
-        <br /> Juan Jose
-        <br />
-        <h1 id="thankYouText">Gracias.</h1>
-      </p>
+      <div id="creditsTextContainer" style={{ bottom: `${bottom}px` }}>
+        {CreditsData.map((credit) => (
+          <>
+            <h3 style={{ marginTop: "2vw", marginBottom: ".7vw" }}>
+              {credit.title}
+            </h3>
+            {credit.workers.map((worker) => (
+              <p>{worker}</p>
+            ))}
+          </>
+        ))}
+        <p id="thankYouText">Gracias.</p>
+      </div>
     </div>
   );
 }

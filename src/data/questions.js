@@ -69,16 +69,6 @@ const QuestionList = [
   {
     position: 4,
     choices: {
-      left: { icon: faHatCowboySide, value: 1 },
-      right: {
-        icon: faGem,
-        value: -1,
-      },
-    },
-  },
-  {
-    position: 5,
-    choices: {
       left: { icon: faSchool, value: -1, style: { color: "#F28123" } },
       right: {
         icon: faRocket,
@@ -88,7 +78,7 @@ const QuestionList = [
     },
   },
   {
-    position: 6,
+    position: 5,
     choices: {
       left: { icon: faTree, value: -1, style: { color: "#fefefe" } },
       right: {
@@ -99,7 +89,7 @@ const QuestionList = [
     },
   },
   {
-    position: 7,
+    position: 6,
     choices: {
       left: { icon: faMasksTheater, value: -1 },
       right: {
@@ -109,7 +99,7 @@ const QuestionList = [
     },
   },
   {
-    position: 8,
+    position: 7,
     choices: {
       left: { icon: faCircleDown, value: 1 },
       right: {
@@ -119,7 +109,7 @@ const QuestionList = [
     },
   },
   {
-    position: 9,
+    position: 8,
     choices: {
       left: { icon: faEye, value: 1 },
       right: {
@@ -129,7 +119,7 @@ const QuestionList = [
     },
   },
   {
-    position: 10,
+    position: 9,
     choices: {
       left: { icon: faLightbulb, value: 1 },
       right: {
@@ -139,17 +129,7 @@ const QuestionList = [
     },
   },
   {
-    position: 11,
-    choices: {
-      left: { icon: faCopy, value: -1 },
-      right: {
-        icon: faSpider,
-        value: 1,
-      },
-    },
-  },
-  {
-    position: 12,
+    position: 10,
     choices: {
       left: { icon: faSun, value: -1 },
       right: {
@@ -159,7 +139,7 @@ const QuestionList = [
     },
   },
   {
-    position: 13,
+    position: 11,
     choices: {
       left: { icon: faSnowflake, value: 1 },
       right: {
@@ -169,7 +149,7 @@ const QuestionList = [
     },
   },
   {
-    position: 14,
+    position: 12,
     choices: {
       left: { icon: faSquareCheck, value: -1 },
       right: {

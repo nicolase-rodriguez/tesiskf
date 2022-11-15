@@ -9,7 +9,9 @@ import { Context } from "../../App";
 import VideosData from "../../data/videos.json";
 import { getVideoMetadata } from "@remotion/media-utils";
 import QuestionList from "../../data/questions";
-import { preloadVideo } from "@remotion/preload";
+import { resolveRedirect } from "@remotion/preload";
+import { prefetch } from "remotion";
+import Loading from "../../components/loading";
 
 const MainPlayer = () => {
   const [ispaused, setispaused] = useState(false);
@@ -29,21 +31,31 @@ const MainPlayer = () => {
   const [isLastVideoFinished, setIsLastVideoFinished] = useState(false);
 
   useEffect(() => {
-    if (!state.nameNumber) navigate("/");
-    setNextVideo(
-      videoList.reduce(
-        (rVideo, cVideo) =>
-          Math.abs(rVideo.value - state.nameNumber) >
-          Math.abs(cVideo.value - state.nameNumber)
-            ? cVideo
-            : rVideo,
-        videoList[0]
-      )
+    if (!state.nameNumber && state.nameNumber !== 0) navigate("/");
+    let videoToLoad = videoList.reduce(
+      (rVideo, cVideo) =>
+        Math.abs(rVideo.value - state.nameNumber) >
+        Math.abs(cVideo.value - state.nameNumber)
+          ? cVideo
+          : rVideo,
+      videoList[0]
     );
+
+    resolveRedirect(videoToLoad.url)
+      .then((resolved) => {
+        videoToLoad.url = resolved;
+      })
+      .finally(() => {
+        prefetch(videoToLoad.url);
+      });
+    setNextVideo(videoToLoad);
   }, [state.nameNumber]);
 
   useEffect(() => {
     if (currentVideo && currentVideo.url === nextVideo.url) {
+      playerRef.current?.play();
+      playerRef.current?.seekTo(0);
+      playerRef.current?.play();
       setNextVideo(undefined);
       setNextVideoDuration(undefined);
     }
@@ -51,7 +63,6 @@ const MainPlayer = () => {
 
   useEffect(() => {
     if (nextVideo) {
-      preloadVideo(nextVideo.url);
       getVideoMetadata(nextVideo.url).then(({ durationInSeconds }) => {
         const duration = Math.round(durationInSeconds * 30) + 20;
         if (!currentVideo) {
@@ -59,6 +70,7 @@ const MainPlayer = () => {
           setVideoDuration(duration);
         } else {
           setNextVideoDuration(duration);
+          playerRef.current.play();
         }
       });
       setVideoList((pVideoList) =>
@@ -79,23 +91,35 @@ const MainPlayer = () => {
       setispaused(true);
     };
     const frameUpdateListener = (event) => {
-      if (videoDuration - event.detail.frame <= 220 && !nextVideo)
-        setShowQuestion(true);
+      if (
+        videoDuration - event.detail.frame <= 250 &&
+        !nextVideo &&
+        !showQuestion
+      ) {
+        if (videoList.length === 1) {
+          setState({ nameNumber: 1 });
+        } else {
+          setShowQuestion(true);
+        }
+      }
       if (videoDuration - 1 <= event.detail.frame) {
-        if (nextVideo) {
+        if (nextVideo && nextVideoDuration) {
           setCurrentVideo(nextVideo);
           setVideoDuration(nextVideoDuration);
         } else if (isLastVideoFinished) {
           navigate("/");
         } else if (!videoList.length) {
           setIsLastVideoFinished(true);
-          setVideoDuration(1000);
+          setVideoDuration(3500);
         }
       } else if (
-        videoDuration - 20 === event.detail.frame &&
-        !nextVideo &&
-        !isLastVideoFinished &&
-        videoList.length
+        (videoDuration - 30 === event.detail.frame &&
+          !nextVideo &&
+          !isLastVideoFinished &&
+          videoList.length > 1) ||
+        (videoDuration - 5 === event.detail.frame &&
+          !nextVideoDuration &&
+          nextVideo)
       ) {
         current.pause();
       }
@@ -103,17 +127,23 @@ const MainPlayer = () => {
     current.addEventListener("play", playlistener);
     current.addEventListener("pause", pauselistener);
     current.addEventListener("frameupdate", frameUpdateListener);
-    current.play();
     return () => {
       current.removeEventListener("play", playlistener);
       current.removeEventListener("pause", pauselistener);
       current.removeEventListener("frameupdate", frameUpdateListener);
     };
-  }, [playerRef, videoDuration, nextVideo, nextVideoDuration]);
+  }, [
+    playerRef,
+    videoDuration,
+    nextVideo,
+    nextVideoDuration,
+    videoList,
+    showQuestion,
+  ]);
 
   useEffect(() => {
-    ispaused && playerRef.current.exitFullscreen();
-  }, [ispaused]);
+    (ispaused || showQuestion) && playerRef.current.exitFullscreen();
+  }, [ispaused, showQuestion]);
 
   return (
     <div id="mainPlayerContainer">
@@ -124,14 +154,17 @@ const MainPlayer = () => {
           <div className="description">
             <p>{currentVideo.description}</p>
           </div>
-          <div className="controls">
-            <button
-              onClick={() => playerRef.current.play()}
-              id="pausePlayButton"
-            >
-              <FontAwesomeIcon icon={faPlay} />
-            </button>
-          </div>
+          {((nextVideo && nextVideoDuration) ||
+            (!nextVideoDuration && !nextVideo && !showQuestion)) && (
+            <div className="controls">
+              <button
+                onClick={() => playerRef.current.play()}
+                id="pausePlayButton"
+              >
+                <FontAwesomeIcon icon={faPlay} />
+              </button>
+            </div>
+          )}
         </div>
       )}
       {showQuestion && currentQuestion && (
@@ -143,7 +176,9 @@ const MainPlayer = () => {
               onClick={() => {
                 setState((pState) => ({
                   nameNumber:
-                    pState.nameNumber + currentQuestion.choices.left.value,
+                    pState.nameNumber +
+                    currentQuestion.choices.left.value +
+                    currentVideo.value * 0.3,
                 }));
                 setCurrentPosition((pPosition) => pPosition + 1);
                 setShowQuestion(false);
@@ -160,7 +195,9 @@ const MainPlayer = () => {
               onClick={() => {
                 setState((pState) => ({
                   nameNumber:
-                    pState.nameNumber + currentQuestion.choices.right.value,
+                    pState.nameNumber +
+                    currentQuestion.choices.right.value +
+                    currentVideo.value * 0.3,
                 }));
                 setCurrentPosition((pPosition) => pPosition + 1);
                 setShowQuestion(false);
@@ -175,7 +212,7 @@ const MainPlayer = () => {
           </div>
         </div>
       )}
-      {currentVideo && videoDuration && (
+      {currentVideo && videoDuration ? (
         <Player
           ref={playerRef}
           component={Mainvideo}
@@ -191,6 +228,8 @@ const MainPlayer = () => {
             maxHeight: "100vh",
           }}
         />
+      ) : (
+        <Loading />
       )}
     </div>
   );

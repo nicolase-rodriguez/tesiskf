@@ -3,7 +3,8 @@
     "title": "Video 1",
     "description": "“El privilegio de la vida es convertirse en quien realmente eres” Carl Jung",
     "value": 4,
-    "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+    "greenScreen": true,
+    "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video1.mp4"
   },
   {
     "title": "Video 2",
@@ -21,6 +22,7 @@
     "title": "Video 4",
     "description": "“Yo no soy lo que me sucedió, soy lo que decido ser” Carl Jung",
     "value": -8,
+    "greenScreen": true,
     "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video4.mp4"
   },
   {
@@ -33,60 +35,61 @@
     "title": "Video 6",
     "description": "“El conocimiento de tu propia oscuridad es el mejor método para hacer frente a las tinieblas de otras personas” Carl Jung",
     "value": -6,
-    "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4"
+    "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video6.mp4"
   },
   {
     "title": "Video 7",
     "description": "“Su visión se aclarará solamente cuando usted pueda mirar en su propio corazón. Quien mira hacia afuera, sueña; quien mira hacia adentro, despierta” Carl Jung",
     "value": 0,
-    "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
+    "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video7.mp4"
   },
   {
     "title": "Video 8",
     "description": "La cosa más aterradora es aceptarse a sí mismo por completo.",
     "value": 6,
-    "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4"
+    "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video8.mp4"
   },
   {
     "title": "Video 9",
     "description": "“Hasta que no te hagas consciente de lo que llevas en tu inconsciente, este último dirigirá tu vida y tú le llamarás destino” Carl Jung",
     "value": -1,
-    "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4"
+    "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video9.mp4"
   },
   {
     "title": "Video 10",
     "description": "“Un zapato que se adapta a una persona, puede quedar mal en otra. No existe una receta para vivir que se adapte a todos” Carl Jung",
     "value": -10,
-    "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4"
+    "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video10.mp4"
   },
   {
     "title": "Video 11",
     "description": "lo que niegas te somete, lo que aceptas te transforma. Aquello a lo que te resistes, persiste",
     "value": 1,
-    "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/SubaruOutbackOnStreetAndDirt.mp4"
+    "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video11.mp4"
   },
   {
     "title": "Video 12",
     "description": "“Todo depende de cómo vemos las cosas, y no de la forma en que son en sí mismas.” Carl Jung",
     "value": 10,
-    "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4"
+    "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video12.mp4"
   },
   {
     "title": "Video 13",
     "description": "“El sueño es la pequeña puerta escondida en el más profundo y más íntimo santuario del alma” Carl Jung",
     "value": 9.8,
-    "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4"
+    "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video13.mp4"
   },
   {
     "title": "Video 14",
     "description": "“No puede haber una transformación de la oscuridad a la luz y de la apatía al movimiento sin emociones” Carl Jung",
     "value": -2,
-    "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WeAreGoingOnBullrun.mp4"
+    "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video14.mp4"
   },
   {
     "title": "Video 15",
     "description": "“La cosa más aterradora es aceptarse a sí mismo por completo.” Carl Jung",
     "value": -4,
-    "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4"
+    "greenScreen": true,
+    "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video15.mp4"
   }
 ]

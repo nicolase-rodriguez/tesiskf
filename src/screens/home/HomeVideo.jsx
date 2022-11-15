@@ -125,7 +125,7 @@ function HomeVideo() {
     >
       {backgroundVideo && (
         <>
-          <Video src={backgroundVideo.url} />
+          <Video src={backgroundVideo.url} style={{ flex: 1 }} />
           <div id="homecontainer">
             <h1 id="homeTitle">Camino de Abraxas</h1>
             <h3 id="homeSubtitle">Camila Diaz</h3>

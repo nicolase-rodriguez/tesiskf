@@ -9,7 +9,6 @@ import { Context } from "../../App";
 import VideosData from "../../data/videos.json";
 import { getVideoMetadata } from "@remotion/media-utils";
 import QuestionList from "../../data/questions";
-import { resolveRedirect } from "@remotion/preload";
 import { prefetch } from "remotion";
 import Loading from "../../components/loading";
 
@@ -29,26 +28,24 @@ const MainPlayer = () => {
     (question) => question.position === currentPosition
   );
   const [isLastVideoFinished, setIsLastVideoFinished] = useState(false);
+  const [videoLoading, setVideoLoading] = useState(false);
 
   useEffect(() => {
     if (!state.nameNumber && state.nameNumber !== 0) navigate("/");
-    let videoToLoad = videoList.reduce(
-      (rVideo, cVideo) =>
-        Math.abs(rVideo.value - state.nameNumber) >
-        Math.abs(cVideo.value - state.nameNumber)
-          ? cVideo
-          : rVideo,
-      videoList[0]
-    );
-
-    resolveRedirect(videoToLoad.url)
-      .then((resolved) => {
-        videoToLoad.url = resolved;
-      })
-      .finally(() => {
-        prefetch(videoToLoad.url);
-      });
-    setNextVideo(videoToLoad);
+    if (!videoLoading) {
+      let videoToLoad = videoList.reduce(
+        (rVideo, cVideo) =>
+          Math.abs(rVideo.value - state.nameNumber) >
+          Math.abs(cVideo.value - state.nameNumber)
+            ? cVideo
+            : rVideo,
+        videoList[0]
+      );
+      setVideoLoading(true);
+      const { waitUntilDone } = prefetch(videoToLoad.url);
+      waitUntilDone().then(() => setVideoLoading(false));
+      setNextVideo(videoToLoad);
+    }
   }, [state.nameNumber]);
 
   useEffect(() => {
@@ -96,8 +93,8 @@ const MainPlayer = () => {
         !nextVideo &&
         !showQuestion
       ) {
-        if (videoList.length === 1) {
-          setState({ nameNumber: 1 });
+        if (videoList.length <= 1) {
+          setState((pState) => ({ nameNumber: pState + 0.01 }));
         } else {
           setShowQuestion(true);
         }
@@ -110,7 +107,7 @@ const MainPlayer = () => {
           navigate("/");
         } else if (!videoList.length) {
           setIsLastVideoFinished(true);
-          setVideoDuration(3500);
+          setVideoDuration(4000);
         }
       } else if (
         (videoDuration - 30 === event.detail.frame &&
@@ -165,6 +162,7 @@ const MainPlayer = () => {
               </button>
             </div>
           )}
+          {videoLoading && <Loading />}
         </div>
       )}
       {showQuestion && currentQuestion && (

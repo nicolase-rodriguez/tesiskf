@@ -18,63 +18,51 @@ const MainPlayer = () => {
   const { state, setState } = useContext(Context);
   const [videoList, setVideoList] = useState(VideosData);
   const [currentVideo, setCurrentVideo] = useState(undefined);
-  const [nextVideo, setNextVideo] = useState(undefined);
   const navigate = useNavigate();
   const [videoDuration, setVideoDuration] = useState(0);
-  const [nextVideoDuration, setNextVideoDuration] = useState(0);
   const [showQuestion, setShowQuestion] = useState(false);
   const [currentPosition, setCurrentPosition] = useState(0);
   const currentQuestion = QuestionList.find(
     (question) => question.position === currentPosition
   );
   const [isLastVideoFinished, setIsLastVideoFinished] = useState(false);
-  const [videoLoading, setVideoLoading] = useState(false);
+  const [cromaColor, setCromaColor] = useState();
+  const [answered, setAnswered] = useState(false);
+
+  useEffect(() => {
+    playerRef.current?.play();
+  }, [currentVideo, videoDuration]);
 
   useEffect(() => {
     if (!state.nameNumber && state.nameNumber !== 0) navigate("/");
-    if (!videoLoading) {
-      let videoToLoad = videoList.reduce(
-        (rVideo, cVideo) =>
-          Math.abs(rVideo.value - state.nameNumber) >
-          Math.abs(cVideo.value - state.nameNumber)
-            ? cVideo
-            : rVideo,
-        videoList[0]
-      );
-      setVideoLoading(true);
-      const { waitUntilDone } = prefetch(videoToLoad.url);
-      waitUntilDone().then(() => setVideoLoading(false));
-      setNextVideo(videoToLoad);
-    }
-  }, [state.nameNumber]);
-
-  useEffect(() => {
-    if (currentVideo && currentVideo.url === nextVideo.url) {
-      playerRef.current?.play();
-      playerRef.current?.seekTo(0);
-      playerRef.current?.play();
-      setNextVideo(undefined);
-      setNextVideoDuration(undefined);
+    if (currentVideo) {
+      if (!currentVideo.greenScreen && cromaColor) setCromaColor(undefined);
+    } else {
+      answered && setAnswered(false);
+      if (videoList.length) {
+        let videoToLoad = videoList.reduce(
+          (rVideo, cVideo) =>
+            Math.abs(rVideo.value - state.nameNumber) >
+            Math.abs(cVideo.value - state.nameNumber)
+              ? cVideo
+              : rVideo,
+          videoList[0]
+        );
+        const { waitUntilDone } = prefetch(videoToLoad.url);
+        getVideoMetadata(videoToLoad.url).then(({ durationInSeconds }) => {
+          const duration = Math.round(durationInSeconds * 30) + 20;
+          setVideoDuration(duration);
+        });
+        setVideoList((pVideoList) =>
+          pVideoList.filter((video) => video.url !== videoToLoad.url)
+        );
+        waitUntilDone().then(() => setCurrentVideo(videoToLoad));
+      } else {
+        setIsLastVideoFinished(true);
+        setVideoDuration(4000);
+      }
     }
   }, [currentVideo]);
-
-  useEffect(() => {
-    if (nextVideo) {
-      getVideoMetadata(nextVideo.url).then(({ durationInSeconds }) => {
-        const duration = Math.round(durationInSeconds * 30) + 20;
-        if (!currentVideo) {
-          setCurrentVideo(nextVideo);
-          setVideoDuration(duration);
-        } else {
-          setNextVideoDuration(duration);
-          playerRef.current.play();
-        }
-      });
-      setVideoList((pVideoList) =>
-        pVideoList.filter((video) => video.url !== nextVideo.url)
-      );
-    }
-  }, [nextVideo]);
 
   useEffect(() => {
     const { current } = playerRef;
@@ -90,33 +78,23 @@ const MainPlayer = () => {
     const frameUpdateListener = (event) => {
       if (
         videoDuration - event.detail.frame <= 250 &&
-        !nextVideo &&
-        !showQuestion
+        videoList.length > 1 &&
+        !showQuestion &&
+        !answered
       ) {
-        if (videoList.length <= 1) {
-          setState((pState) => ({ nameNumber: pState + 0.01 }));
-        } else {
-          setShowQuestion(true);
-        }
+        setShowQuestion(true);
       }
       if (videoDuration - 1 <= event.detail.frame) {
-        if (nextVideo && nextVideoDuration) {
-          setCurrentVideo(nextVideo);
-          setVideoDuration(nextVideoDuration);
-        } else if (isLastVideoFinished) {
+        if (isLastVideoFinished) {
           navigate("/");
-        } else if (!videoList.length) {
-          setIsLastVideoFinished(true);
-          setVideoDuration(4000);
+        } else {
+          setCurrentVideo(undefined);
         }
       } else if (
-        (videoDuration - 30 === event.detail.frame &&
-          !nextVideo &&
-          !isLastVideoFinished &&
-          videoList.length > 1) ||
-        (videoDuration - 5 === event.detail.frame &&
-          !nextVideoDuration &&
-          nextVideo)
+        videoDuration - 30 === event.detail.frame &&
+        !answered &&
+        !isLastVideoFinished &&
+        videoList.length > 1
       ) {
         current.pause();
       }
@@ -132,10 +110,11 @@ const MainPlayer = () => {
   }, [
     playerRef,
     videoDuration,
-    nextVideo,
-    nextVideoDuration,
     videoList,
     showQuestion,
+    answered,
+    isLastVideoFinished,
+    currentVideo,
   ]);
 
   useEffect(() => {
@@ -146,13 +125,12 @@ const MainPlayer = () => {
     <div id="mainPlayerContainer">
       {ispaused && (
         <div className="background">
-          <h1 className="tittle">{currentVideo.title.toUpperCase()}</h1>
+          <h1 className="tittle">{currentVideo?.title.toUpperCase()}</h1>
           <div className="linetittle" />
           <div className="description">
-            <p>{currentVideo.description}</p>
+            <p>{currentVideo?.description}</p>
           </div>
-          {((nextVideo && nextVideoDuration) ||
-            (!nextVideoDuration && !nextVideo && !showQuestion)) && (
+          {!showQuestion && (
             <div className="controls">
               <button
                 onClick={() => playerRef.current.play()}
@@ -162,10 +140,9 @@ const MainPlayer = () => {
               </button>
             </div>
           )}
-          {videoLoading && <Loading />}
         </div>
       )}
-      {showQuestion && currentQuestion && (
+      {showQuestion && currentQuestion && !answered && (
         <div id="questionContainer">
           <p id="questionTitle">Tiempo de elegir</p>
           <div>
@@ -180,7 +157,8 @@ const MainPlayer = () => {
                 }));
                 setCurrentPosition((pPosition) => pPosition + 1);
                 setShowQuestion(false);
-                playerRef.current.play();
+                setAnswered(true);
+                playerRef.current?.play();
               }}
             >
               <FontAwesomeIcon
@@ -199,7 +177,8 @@ const MainPlayer = () => {
                 }));
                 setCurrentPosition((pPosition) => pPosition + 1);
                 setShowQuestion(false);
-                playerRef.current.play();
+                setAnswered(true);
+                playerRef.current?.play();
               }}
             >
               <FontAwesomeIcon
@@ -210,22 +189,37 @@ const MainPlayer = () => {
           </div>
         </div>
       )}
-      {currentVideo && videoDuration ? (
-        <Player
-          ref={playerRef}
-          component={Mainvideo}
-          inputProps={{ currentVideo, isLastVideoFinished }}
-          durationInFrames={videoDuration}
-          compositionWidth={window.innerWidth}
-          compositionHeight={window.innerHeight}
-          fps={30}
-          controls={!ispaused}
-          spaceKeyToPlayOrPause
-          style={{
-            maxWidth: "100vw",
-            maxHeight: "100vh",
-          }}
-        />
+      {(currentVideo && videoDuration) || isLastVideoFinished ? (
+        <>
+          <Player
+            ref={playerRef}
+            component={Mainvideo}
+            inputProps={{ currentVideo, isLastVideoFinished, cromaColor }}
+            durationInFrames={videoDuration}
+            compositionWidth={window.innerWidth}
+            compositionHeight={window.innerHeight}
+            fps={30}
+            controls={!ispaused}
+            spaceKeyToPlayOrPause
+            style={{
+              maxWidth: "100vw",
+              maxHeight: "100vh",
+            }}
+          />
+          {currentVideo?.greenScreen && (
+            <div className="colorSelectorContainer">
+              {currentVideo.colors.map((color) => (
+                <div
+                  style={{
+                    backgroundColor: color,
+                    border: cromaColor === color ? "solid 3px #ADADAD" : "none",
+                  }}
+                  onClick={() => setCromaColor(color)}
+                />
+              ))}
+            </div>
+          )}
+        </>
       ) : (
         <Loading />
       )}

@@ -4,7 +4,8 @@
     "description": "“El privilegio de la vida es convertirse en quien realmente eres” Carl Jung",
     "value": 4,
     "greenScreen": true,
-    "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video1.mp4"
+    "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video1.mp4",
+    "colors": ["#FF3A20", "#595959"]
   },
   {
     "title": "Video 2",
@@ -16,20 +17,31 @@
     "title": "Video 3",
     "description": "“El inconsciente no es algo malo por naturaleza, es también fuente de bienestar. No sólo oscuridad sino también luz, no sólo bestial y demoníaca, sino también espiritual y divina.” Carl Jung",
     "value": 0,
-    "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+    "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+    "greenScreen": true,
+    "colors": ["#FF3A20", "#B14AED", "#3C91E6"]
   },
   {
     "title": "Video 4",
     "description": "“Yo no soy lo que me sucedió, soy lo que decido ser” Carl Jung",
     "value": -8,
     "greenScreen": true,
-    "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video4.mp4"
+    "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video4.mp4",
+    "colors": [
+      "#FF3A20",
+      "#B14AED",
+      "#3C91E6",
+      "#595959",
+      "#F28123",
+      "#0D0D0D",
+      "#FEFEFE"
+    ]
   },
   {
     "title": "Video 5",
     "description": "“Todos nacemos originales y morimos como copias” Carl Jung",
     "value": -9.8,
-    "url": "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+    "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video5.mp4"
   },
   {
     "title": "Video 6",
@@ -83,13 +95,14 @@
     "title": "Video 14",
     "description": "“No puede haber una transformación de la oscuridad a la luz y de la apatía al movimiento sin emociones” Carl Jung",
     "value": -2,
+    "greenScreen": true,
+    "colors": ["#FF3A20", "#595959"],
     "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video14.mp4"
   },
   {
     "title": "Video 15",
     "description": "“La cosa más aterradora es aceptarse a sí mismo por completo.” Carl Jung",
     "value": -4,
-    "greenScreen": true,
     "url": "https://dq9hhc8pj0xpb.cloudfront.net/videos/Video15.mp4"
   }
 ]
